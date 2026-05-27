@@ -1,0 +1,5 @@
+# requirements.txt - EES N2 School Database Pipeline 
+python-docx 
+pandas 
+python-dotenv 
+openpyxl 

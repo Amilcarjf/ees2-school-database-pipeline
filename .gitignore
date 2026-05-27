@@ -1,0 +1,45 @@
+# .gitignore - EES N2 School Database Pipeline 
+ 
+# Variables de entorno 
+.env 
+ 
+# Base de datos SQLite 
+*.db 
+data/sqlite/ 
+ 
+# Archivos fuente Word - datos sensibles de alumnos 
+data/raw/ 
+ 
+# Outputs generados 
+data/outputs/ 
+ 
+# Python 
+__pycache__/ 
+*.pyc 
+*.pyo 
+*.egg-info/ 
+dist/ 
+build/ 
+ 
+# Entornos virtuales 
+venv/ 
+.venv/ 
+env/ 
+ 
+# Jupyter 
+.ipynb_checkpoints/ 
+ 
+# IDEs 
+.vscode/ 
+.idea/ 
+ 
+# Windows 
+Thumbs.db 
+Desktop.ini 
+ 
+# Logs 
+*.log 
+ 
+# Temporales 
+*.tmp 
+*.bak 
