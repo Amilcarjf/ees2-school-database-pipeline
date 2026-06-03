@@ -43,3 +43,8 @@ Desktop.ini
 # Temporales 
 *.tmp 
 *.bak 
+
+# Temporales de Microsoft Office
+~$*.docx
+~$*.xlsx
+~$*.pptx
