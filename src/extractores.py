@@ -14,6 +14,40 @@ CANTIDAD_COLUMNAS_LEGAJOS = 5
 CANTIDAD_COLUMNAS_MARZO = 2
 
 # ========================================
+# LIMPIEZA ESTRUCTURAL
+# ========================================
+
+def eliminar_columnas_vacias(df):
+    """
+    Elimina columnas completamente vacías.
+
+    Se utiliza para remover ruido estructural
+    accidental proveniente de tablas Word.
+    """
+    df = df.copy()
+
+    columnas_a_eliminar = []
+
+    for columna in df.columns:
+
+        encabezado_vacio = str(columna).strip() == ""
+
+        columna_vacia = (
+            df[columna]
+            .astype(str)
+            .str.strip()
+            .eq("")
+            .all()
+        )
+
+        if encabezado_vacio and columna_vacia:
+            columnas_a_eliminar.append(columna)
+
+    df = df.drop(columns=columnas_a_eliminar)
+
+    return df
+
+# ========================================
 # EXTRACCIÓN DE TABLAS DOCX
 # ========================================
 
@@ -90,6 +124,8 @@ def extraer_datos_raw(ruta_archivo, curso, division, anio):
 
     df = crear_dataframe_raw(filas)
 
+    df = eliminar_columnas_vacias(df)
+
     validar_cantidad_columnas(df, CANTIDAD_COLUMNAS_DATOS)
 
     df["curso"] = curso
@@ -117,6 +153,8 @@ def extraer_legajos_raw(ruta_archivo, curso, division, anio):
 
     df = crear_dataframe_raw(filas)
 
+    df = eliminar_columnas_vacias(df)
+
     validar_cantidad_columnas(df, CANTIDAD_COLUMNAS_LEGAJOS)
 
     df["curso"] = curso
@@ -143,6 +181,8 @@ def extraer_marzo_raw(ruta_archivo, curso, division, anio):
     filas = extraer_tabla_docx(ruta_archivo)
 
     df = crear_dataframe_raw(filas)
+
+    df = eliminar_columnas_vacias(df)
 
     validar_cantidad_columnas(df, CANTIDAD_COLUMNAS_MARZO)
 
